@@ -25,7 +25,7 @@ import { eulerTokenABI } from './euler_token_abi';
 import { eulerStakingABI } from './euler_staking_abi';
 import { styled } from '@mui/material/styles';
 import { secureLoader } from 'lib/api';
-import { ITokenPriceDTO, TOKENS_HANDLER_URL } from 'pages/api/tokens';
+import { ITokenPriceDTO, TOKENS_HANDLER_URL } from 'pages/api/tokens/[...slug]';
 import useSWR from 'swr';
 
 function StakingContent(): JSX.Element {

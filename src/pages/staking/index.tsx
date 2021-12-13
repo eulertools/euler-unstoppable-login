@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
-import StakingContentWrapper from 'components/Staking/Content';
+import StakingContent from 'components/Staking/Content';
 import { pageview } from 'lib/gtag';
+import Box from '@mui/material/Box';
 
 const StakingPage: FC = () => {
   React.useEffect(() => {
     pageview('/staking');
   }, []);
 
-  return <StakingContentWrapper />;
+  return (
+    <Box p={4}>
+      <StakingContent />
+    </Box>
+  );
 };
 
 export default StakingPage;

@@ -4,6 +4,6 @@ coverage/
 flow-coverage/
 node_modules/
 .idea/
-.env
+.env*.local
 .DS_Store
 .vscode/

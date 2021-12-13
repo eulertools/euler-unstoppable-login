@@ -53,7 +53,7 @@ function StakingHeader(props: IProps): JSX.Element {
     <GridContainerStyled container spacing={2} pb={2}>
       <Grid item xs={12} md={4} display='flex' alignItems='center'>
         <Box display='flex' pr={1}>
-          <Image alt='euler-logo' src='/static/eulerLogo.svg' height={52} />
+          <Image alt='euler-logo' src='/assets/eulerLogo.png' height={52} width={52} />
         </Box>
         <Box display='flex' flexDirection='column'>
           <Typography color='textPrimary' variant='h5' my={1}>

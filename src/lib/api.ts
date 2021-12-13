@@ -56,11 +56,11 @@ export const useAPIPost = <R, P>(endpoint: string, getToken?: () => Promise<stri
 
   const handleError = (error: AxiosError): void => {
     setResponse(null);
-    if (error.response) {
+    if (error?.response) {
       const data = error.response.data;
       setError(new HttpError(error.response.status, data));
     } else {
-      setError(new HttpError(500, { error: error.message }));
+      setError(new HttpError(500, { error: error?.message || 'Unknown Error' }));
     }
   };
 

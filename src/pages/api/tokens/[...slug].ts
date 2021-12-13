@@ -7,13 +7,17 @@ interface NextApiRequestWithParams extends NextApiRequest {
   params: { [key: string]: string };
 }
 
-const handler = nc<NextApiRequestWithParams, NextApiResponse>({ attachParams: true });
+function onNoMatch(__req, res) {
+  res.status(404).end('Page not found.. or is it');
+}
 
 export interface ITokenPriceDTO {
   price_usd: number;
 }
 
-handler.get('/:tokenAddress', async (req, res) => {
+const handler = nc<NextApiRequestWithParams, NextApiResponse>({ attachParams: true, onNoMatch });
+
+handler.get(`${TOKENS_HANDLER_URL}/:tokenAddress`, async (req, res) => {
   const fetchResponse = await fetch(
     `https://bsc.catalog.prod.euler.tools/tokens/${req.params.tokenAddress}?fields[]=price_usd`,
   );
@@ -29,7 +33,7 @@ handler.get('/:tokenAddress', async (req, res) => {
   }
 });
 
-handler.get('/bnb/price', async (__req, res) => {
+handler.get(`${TOKENS_HANDLER_URL}/bnb/price`, async (__req, res) => {
   const fetchResponse = await fetch('https://api.binance.com/api/v1/ticker/price?symbol=BNBUSDT');
 
   try {
