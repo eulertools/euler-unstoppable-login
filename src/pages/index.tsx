@@ -18,12 +18,7 @@ import { useRouter } from 'next/router';
 const IndexPage: NextPage = () => {
   const router = useRouter();
 
-  const [error, setError] = React.useState<string>(
-    router.query.error ? decodeURIComponent(router.query.error as string) : null,
-  );
-
   const onLoginWithUnstoppable = React.useCallback(async (values, { setSubmitting }) => {
-    setError(null);
     setSubmitting(true);
 
     setTimeout(() => {
@@ -91,9 +86,9 @@ const IndexPage: NextPage = () => {
               </form>
             )}
           </Formik>
-          {error ? (
+          {router?.query?.error ? (
             <Typography pt={4} variant='caption' color='red'>
-              {error}
+              {router?.query?.error}
             </Typography>
           ) : null}
         </Box>

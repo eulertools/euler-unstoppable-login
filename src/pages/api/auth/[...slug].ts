@@ -38,13 +38,33 @@ handler.post(
       return;
     }
 
-    await callback(req, res);
-
-    res.redirect('/staking');
+    res.writeHead(301, {
+      Location: `${AUTH_HANDLER_URL}/callback/authorize?state=${req.body.state}&code=${req.body.code}`,
+    });
+    res.end();
   }),
 );
 
-handler.post(
+handler.get(
+  `${AUTH_HANDLER_URL}/callback/authorize`,
+  withSessionRoute(async (req, res) => {
+    req.body = {
+      state: req.query.state,
+      code: req.query.code,
+    };
+
+    console.log('🚀 -----------------------------------------------------------------');
+    console.log('🚀 ~ Calling /auth/callback/authorize\n', req.body, '\nsession info:', req.session);
+    console.log('🚀 -----------------------------------------------------------------');
+
+    await callback(req, res);
+
+    res.writeHead(301, { Location: '/staking' });
+    res.end();
+  }),
+);
+
+handler.get(
   `${AUTH_HANDLER_URL}/logout`,
   withSessionRoute(async (req, res) => {
     console.log('🚀 -----------------------------------------------------------------');

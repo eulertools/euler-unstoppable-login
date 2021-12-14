@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
 import Web3 from 'web3';
+import { useWeb3React } from '@web3-react/core';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
@@ -29,7 +30,7 @@ import { ITokenPriceDTO, TOKENS_HANDLER_URL } from 'pages/api/tokens/[...slug]';
 import useSWR from 'swr';
 
 function StakingContent(): JSX.Element {
-  const { account = '123', active = true, library = {}, chainId = 56 } = {} as any;
+  const { account, active, library, chainId } = useWeb3React();
 
   const isMountedRef = useIsMountedRef();
 

@@ -6,4 +6,8 @@ module.exports = withTM({
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  reactStrictMode: true,
+  images: {
+    domains: ['assets.prod.euler.tools'],
+  },
 });
