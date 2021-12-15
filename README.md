@@ -8,6 +8,8 @@ Euler Tools Staking Connected with Unstoppable Login
 
 # Recorded video demo of the integration
 
+[Youtube Video](https://youtu.be/rrc1JpL1K18)
+
 # Person of contact in case there are any questions
 
 ### Discord ID
