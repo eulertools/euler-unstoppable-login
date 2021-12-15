@@ -39,7 +39,9 @@ handler.post(
     }
 
     res.writeHead(301, {
-      Location: `${AUTH_HANDLER_URL}/callback/authorize?state=${req.body.state}&code=${req.body.code}`,
+      Location: `${AUTH_HANDLER_URL}/callback/authorize?state=${encodeURIComponent(
+        req.body.state,
+      )}&code=${encodeURIComponent(req.body.code)}`,
     });
     res.end();
   }),
@@ -49,8 +51,8 @@ handler.get(
   `${AUTH_HANDLER_URL}/callback/authorize`,
   withSessionRoute(async (req, res) => {
     req.body = {
-      state: req.query.state,
-      code: req.query.code,
+      state: decodeURIComponent(req.query.state as string),
+      code: decodeURIComponent(req.query.code as string),
     };
 
     console.log('🚀 -----------------------------------------------------------------');

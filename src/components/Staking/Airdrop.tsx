@@ -24,7 +24,9 @@ function AirdropContent(props: IProps): JSX.Element {
     const promoDismissed = localStorage.getItem(DISMISS_LOCALSTORAGE_KEY);
 
     const bnUserStakingAmount =
-      contractsInformation?.userInfo.amount !== '0' ? uint256ToDecimalBn(contractsInformation?.userInfo.amount) : null;
+      contractsInformation?.userInfo?.amount && contractsInformation?.userInfo?.amount !== '0'
+        ? uint256ToDecimalBn(contractsInformation?.userInfo.amount)
+        : null;
 
     const airdropEligible = bnUserStakingAmount?.isGreaterThanOrEqualTo(EULER_AIRDROP_MIN);
 

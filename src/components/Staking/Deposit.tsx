@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { Formik } from 'formik';
 import Web3 from 'web3';
+import { useWeb3React } from '@web3-react/core';
 import * as Yup from 'yup';
 import React from 'react';
 import Button from '@mui/material/Button';
@@ -23,8 +24,8 @@ interface IProps {
 function StakeForm(props: IProps): JSX.Element {
   const theme = useTheme();
 
-  // Consume from unstoppable login
-  const account = '0xD00C43154d8962Ae6275f0BFc82F065a633B083B';
+  const { account } = useWeb3React();
+
   const isMountedRef = useIsMountedRef();
 
   const { eulerWalletBalance, eulerUSDPrice, contractsInformation, web3 } = props;

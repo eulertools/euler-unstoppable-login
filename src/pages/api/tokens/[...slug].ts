@@ -12,7 +12,9 @@ function onNoMatch(__req, res) {
 }
 
 export interface ITokenPriceDTO {
-  price_usd: number;
+  _source: {
+    price_usd: number;
+  };
 }
 
 const handler = nc<NextApiRequestWithParams, NextApiResponse>({ attachParams: true, onNoMatch });

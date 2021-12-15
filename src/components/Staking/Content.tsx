@@ -147,7 +147,7 @@ function StakingContent(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
-  const eulerUSDPrice = new BigNumber(eulerPriceData?.price_usd ?? 0);
+  const eulerUSDPrice = new BigNumber(eulerPriceData?._source?.price_usd ?? 0);
 
   return (
     <>

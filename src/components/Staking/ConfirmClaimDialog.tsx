@@ -1,3 +1,4 @@
+import { useWeb3React } from '@web3-react/core';
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -17,8 +18,7 @@ interface IProps extends DialogProps {
 }
 
 const ConfirmClaimDialog: React.FC<IProps> = ({ onCancel, contractsInformation, ...dialogProps }) => {
-  // TODO account -> consume from unstoppable
-  const account = '0xD00C43154d8962Ae6275f0BFc82F065a633B083B';
+  const { account } = useWeb3React();
 
   const [isClaiming, setIsClaiming] = useState<boolean>(false);
 
