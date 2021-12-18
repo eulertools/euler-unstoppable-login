@@ -1,5 +1,6 @@
 import { Client } from '@uauth/node';
 import Resolution from '@unstoppabledomains/resolution';
+import { setCookies, getCookie, removeCookies } from 'cookies-next';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const resolution = new Resolution();
@@ -21,6 +22,8 @@ const productionCredentials = {
   resolution,
 };
 
+const USER_INTERACTION_COOKIE_NAME = 'user-interaction';
+
 export const uauthClient = new Client(
   process.env.NODE_ENV === 'production' ? productionCredentials : developmentCredentials,
 );
@@ -28,13 +31,24 @@ export const uauthClient = new Client(
 export const { login, callback, middleware } = (() => {
   const { login, callback, middleware } = uauthClient.createLogin<any>({
     storeInteraction: async (ctx, interaction) => {
-      ctx.req.session = { interaction };
-      await ctx.req.session.save();
+      setCookies(USER_INTERACTION_COOKIE_NAME, interaction, {
+        sameSite: 'none',
+        secure: true,
+        req: ctx.req,
+        res: ctx.res,
+      });
     },
-    retrieveInteraction: ctx => ctx.req.session?.interaction,
+    retrieveInteraction: ctx => {
+      const interactionAsString = getCookie(USER_INTERACTION_COOKIE_NAME, { req: ctx.req, res: ctx.res });
+
+      try {
+        return JSON.parse(interactionAsString as string);
+      } catch {
+        return {};
+      }
+    },
     deleteInteraction: async ctx => {
-      delete ctx.req.session.interaction;
-      await ctx.req.session.save();
+      removeCookies(USER_INTERACTION_COOKIE_NAME, { req: ctx.req, res: ctx.res });
     },
     storeAuthorization: async (ctx, authorization) => {
       ctx.req.session = { uauth: authorization };

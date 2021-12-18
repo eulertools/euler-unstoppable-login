@@ -32,6 +32,7 @@
     "@web3-react/walletconnect-connector": "^6.2.8",
     "axios": "^0.23.0",
     "bignumber.js": "^9.0.1",
+    "cookies-next": "^2.0.3",
     "formik": "^2.2.9",
     "iron-session": "^6.0.4",
     "moment": "^2.29.1",
