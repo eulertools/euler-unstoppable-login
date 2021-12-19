@@ -30,34 +30,13 @@ handler.post(
   `${AUTH_HANDLER_URL}/callback`,
   withSessionRoute(async (req, res) => {
     console.log('🚀 -----------------------------------------------------------------');
-    console.log('🚀 ~ Calling /auth/callback\n', req.body, '\nsession info:', req.session);
+    console.log('🚀 ~ Calling /auth/callback with cookies:\n', req.cookies, '\n and body:\n', req.body);
     console.log('🚀 -----------------------------------------------------------------');
 
     if (req.body.error) {
       res.redirect(`/?error=${encodeURIComponent(req.body.error?.error_description || 'Error validating user')}`);
       return;
     }
-
-    res.writeHead(301, {
-      Location: `${AUTH_HANDLER_URL}/callback/authorize?state=${encodeURIComponent(
-        req.body.state,
-      )}&code=${encodeURIComponent(req.body.code)}`,
-    });
-    res.end();
-  }),
-);
-
-handler.get(
-  `${AUTH_HANDLER_URL}/callback/authorize`,
-  withSessionRoute(async (req, res) => {
-    req.body = {
-      state: decodeURIComponent(req.query.state as string),
-      code: decodeURIComponent(req.query.code as string),
-    };
-
-    console.log('🚀 -----------------------------------------------------------------');
-    console.log('🚀 ~ Calling /auth/callback/authorize\n', req.body, '\nsession info:', req.session);
-    console.log('🚀 -----------------------------------------------------------------');
 
     await callback(req, res);
 
