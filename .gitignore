@@ -1,7 +1,10 @@
+# Environment
+.env
+.env*.local
+
+# Generated Files
 out/
 .next
 coverage/
 flow-coverage/
 node_modules/
-.env
-.env*.local
