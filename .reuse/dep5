@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Euler Unstoppable Login
+Upstream-Contact: Euler Tools Solutions <agustin.gabiola@gmail.com>
+Source: https://github.com/eulertools/euler-unstoppable-login
+
+Files: *
+Copyright: 2021 Euler Tools Solutions, SL
+License: MIT
